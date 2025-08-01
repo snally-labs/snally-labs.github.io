@@ -1,0 +1,147 @@
+/* ─── THEME VARIABLES ─── */
+:root {
+  --pink: #ff3bbd;
+  --purple: #8e22ff;
+  --cyan: #00e8ff;
+  --dark: #0c0118;
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  --text-light: #e7e7ff;
+  --text-muted: #d5d5ff;
+}
+
+/* ─── GLOBAL RESET ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  background: var(--dark);
+  color-scheme: dark;
+}
+body {
+  font-family: var(--font-sans);
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 5vw, 6rem) 1rem;
+  text-align: center;
+}
+
+/* glowing flame behind content */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20vmax;
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    var(--pink),
+    var(--purple),
+    var(--cyan),
+    var(--pink)
+  );
+  filter: blur(100px) saturate(200%);
+  animation: spin 25s linear infinite;
+  z-index: -2;
+}
+/* dark overlay for legibility */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--dark);
+  opacity: 0.85;
+  z-index: -1;
+}
+
+/* ─── LOGO & TITLE ─── */
+.logo {
+  width: clamp(120px, 20vw, 200px);
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 900;
+  background: linear-gradient(90deg, var(--pink), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-style: italic;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  max-width: 40ch;
+}
+
+/* ─── DESCRIPTION ─── */
+.description {
+  max-width: 54ch;
+}
+.description p + p {
+  margin-top: 1.25rem;
+}
+
+/* ─── BUTTONS ─── */
+.links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.4rem;
+  background: linear-gradient(145deg, var(--pink), var(--purple));
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn:hover,
+.btn:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1.2rem rgba(0, 0, 0, 0.5);
+}
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.3) inset;
+}
+
+/* ─── ANIMATIONS & ACCESSIBILITY ─── */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .btn {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+}
